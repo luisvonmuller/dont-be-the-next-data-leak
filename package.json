@@ -1,0 +1,32 @@
+{
+  "name": "dont-be-the-next-data-leak",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luisvonmuller/dont-be-the-next-data-leak.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luisvonmuller/dont-be-the-next-data-leak/issues"
+  },
+  "homepage": "https://github.com/luisvonmuller/dont-be-the-next-data-leak#readme",
+  "devDependencies": {
+    "@types/node": "^16.11.7",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "@types/mongoose": "^5.11.97",
+    "crypto": "^1.0.1",
+    "mongoose": "^6.0.12"
+  }
+}
