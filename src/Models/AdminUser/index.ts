@@ -1,5 +1,5 @@
 import { model, Schema, Model } from 'mongoose';
-import AdmUser from './interface';
+import AdmUser from './type';
 
 /** Creates the model on MongoDb */
 const AdmUser: Schema = new Schema({
@@ -8,4 +8,4 @@ const AdmUser: Schema = new Schema({
   lastName: { type: String, required: true }
 });
 
-const User: Model<AdmUser> = model('User', AdmUser);
+export default model('AdmUser', AdmUser);
