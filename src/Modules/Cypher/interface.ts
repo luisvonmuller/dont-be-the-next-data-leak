@@ -1,5 +1,7 @@
-interface Cyper {
-    pseudoPublicKey: string;
-    ownSecret: string,
-
+interface CypherField<T> {
+  pseudoPublicKey: string;
+  ownSecret: string,
+  value: T; // 
 }
+
+export { CypherField };

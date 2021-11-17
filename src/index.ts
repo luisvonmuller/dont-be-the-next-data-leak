@@ -8,6 +8,11 @@ import EndUser from './Models/User/type'
 // AdminUser 🤩
 import AdminUserLike from './Models/AdminUser/type';
 
+//Cyphering stuff
+import { cypherField } from './Modules/Cypher/index';
+
+
+
 const generateEndUser = async (): Promise<EndUser> => {
   let generateSaltedPassword: GeneratedPasswordAndHash = await generatePassword('enduser');
   return {
@@ -43,7 +48,6 @@ const mapSensitiveFields = (endUser: EndUser): string[] => {
   })
 }
 
-const cypherField = ()
 
 // @return -> fieldKeyRelation
 const generateFieldKeyRelation = (sensitiveField: string[], endUser: EndUser): void => {
@@ -52,7 +56,7 @@ const generateFieldKeyRelation = (sensitiveField: string[], endUser: EndUser): v
     let accessKey: string = 'somerandomstring'; // todo: random.bytes(...).colet()
     const keysRelation: fieldKeyRelation = {
       targetField: propertyPath,
-      personalKey: cypherField({ pseudoPublicKey: accessKey, ownSecret: endUser.password, }), // 🔑 A key Pessoal (Self use to read/edit)
+      personalKey: cypherField<typeof targetValue>({ pseudoPublicKey: accessKey, ownSecret: endUser.password, value: targetValue }), // 🔑 A key Pessoal (Self use to read/edit)
     }
   })
 }
