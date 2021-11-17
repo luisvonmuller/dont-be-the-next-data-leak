@@ -1,5 +1,5 @@
 interface CypherField<T> {
-  pseudoPublicKey: string;
+  pseudoPublicKey: Buffer;
   ownSecret: string,
   value: T; // 
 }

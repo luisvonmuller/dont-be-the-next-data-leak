@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { generatePassword, verifyPassword, GeneratedPasswordAndHash } from './Modules/Password';
 // 🔑 Key Relation Storage... 🤔
 import { KeysStorage, fieldKeyRelation } from './Models/KeyStorage/type';
@@ -50,11 +51,11 @@ const mapSensitiveFields = (endUser: EndUser): string[] => {
 
 
 // @return -> fieldKeyRelation
-const generateFieldKeyRelation = (sensitiveField: string[], endUser: EndUser): void => {
-  sensitiveField.map((propertyPath) => {
+const generateFieldKeyRelation = (sensitiveField: string[], endUser: EndUser): fieldKeyRelation[] => {
+  return sensitiveField.map((propertyPath) => {
     let targetValue = { ...endUser.privateStuff }[propertyPath];
-    let accessKey: string = 'somerandomstring'; // todo: random.bytes(...).colet()
-    const keysRelation: fieldKeyRelation = {
+    let accessKey: Buffer = crypto.randomBytes(16);
+    return {
       targetField: propertyPath,
       personalKey: cypherField<typeof targetValue>({ pseudoPublicKey: accessKey, ownSecret: endUser.password, value: targetValue }), // 🔑 A key Pessoal (Self use to read/edit)
     }
@@ -73,14 +74,15 @@ const generateFieldKeyRelation = (sensitiveField: string[], endUser: EndUser): v
   try {
     /** User estático para validar o conceito */
     const endUser: EndUser = await generateEndUser();
+    console.log(Buffer.from(endUser.password).length);
     /** Admin estático para validar o conceito */
     const adminUser: AdminUserLike = await generateAdminUser();
 
     const endUserSensitiveFields: string[] = mapSensitiveFields(endUser);
     console.log(endUserSensitiveFields);
 
-    const keysRelation = generateFieldKeyRelation(endUserSensitiveFields, endUser);
-
+    const keysRelation: fieldKeyRelation[] = generateFieldKeyRelation(endUserSensitiveFields, endUser);
+    console.log(keysRelation);
 
 
 
