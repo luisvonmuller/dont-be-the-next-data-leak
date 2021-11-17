@@ -14,12 +14,12 @@ const generateEndUser = async (): Promise<EndUser> => {
     email: 'batatinha@gmail.com',
     password: generateSaltedPassword.hash,
     salt: generateSaltedPassword.salt,
-    privateStuff: [
-      {
-        sensitiveField: 'Histórico do navegador do Luís 👀', // Esse campo deve ser $Ifrado (Endereço)
-        anotherSensitiveField: 'Falar que rust lang não presta 🦀', // Esse campo deve ser $Ifrado (CPF)
-      }
-    ]
+    privateStuff:
+    {
+      sensitiveField: 'Histórico do navegador do Luís 👀', // Esse campo deve ser $Ifrado (Endereço)
+      anotherSensitiveField: 'Falar que rust lang não presta 🦀', // Esse campo deve ser $Ifrado (CPF)
+    }
+
   }
 }
 
@@ -28,14 +28,31 @@ const generateEndUser = async (): Promise<EndUser> => {
  * 
  *  Todo: Randomize it. (Para depois fazer benchmarcks)
 */
-async function generateAdminUser() {
+const generateAdminUser = async (): Promise<AdminUserLike> => {
   const generateSaltedPassword: GeneratedPasswordAndHash = await generatePassword('123456789');
   return {
-    email: string;
-    password: string; /* One way encryption -> Salted Hash 🧂. */
-    salt: string;
+    email: 'batatao@gmail.com',
+    password: generateSaltedPassword.hash, /* One way encryption -> Salted Hash 🧂. */
+    salt: generateSaltedPassword.salt,
   }
 }
+
+const mapSensitiveFields = (endUser: EndUser): string[] => {
+  return Object.getOwnPropertyNames({ ...endUser.privateStuff }).map((field) => {
+    return field;
+  })
+}
+
+// @return -> fieldKeyRelation
+const generateFieldKeyRelation = (sensitiveField: string[], endUser: EndUser): void => {
+  sensitiveField.map((propertyPath) => {
+
+  })
+}
+
+
+
+
 
 // To check password.   console.log(await verifyPassword({ password: '123456789', ...genPasswordHashObj }));
 
@@ -43,7 +60,20 @@ async function generateAdminUser() {
 
 (async () => {
   try {
+    /** User estático para validar o conceito */
     const endUser: EndUser = await generateEndUser();
+    /** Admin estático para validar o conceito */
+    const adminUser: AdminUserLike = await generateAdminUser();
+
+    const endUserSensitiveFields: string[] = mapSensitiveFields(endUser);
+    console.log(endUserSensitiveFields);
+
+    const keysRelation = generateFieldKeyRelation(endUserSensitiveFields, endUser);
+
+
+
+
+
   } catch (err) {
     console.log(err);
   }
