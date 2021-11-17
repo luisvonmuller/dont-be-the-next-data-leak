@@ -6,10 +6,10 @@ type User = {
   salt: string;
   privateStuff: [
     {
-      sensitiveField: string;
-      anotherSensitiveField: string;
+      sensitiveField: string; // Esse campo deve ser $Ifrado (Endereço)
+      anotherSensitiveField: string; // Esse campo deve ser $Ifrado (CPF)
     }
   ]
-} & Document;
+};
 
 export default User;

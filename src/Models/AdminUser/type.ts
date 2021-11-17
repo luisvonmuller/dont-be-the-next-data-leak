@@ -7,6 +7,6 @@ type AdmUser = {
   salt: string;
   firstName: string;
   lastName: string;
-} & Document;
+};
 
 export default AdmUser;
