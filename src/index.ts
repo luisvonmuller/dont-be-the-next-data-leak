@@ -43,10 +43,17 @@ const mapSensitiveFields = (endUser: EndUser): string[] => {
   })
 }
 
+const cypherField = ()
+
 // @return -> fieldKeyRelation
 const generateFieldKeyRelation = (sensitiveField: string[], endUser: EndUser): void => {
   sensitiveField.map((propertyPath) => {
-
+    let targetValue = { ...endUser.privateStuff }[propertyPath];
+    let generateSecret = ;
+    const keysRelation: fieldKeyRelation = {
+      targetField: propertyPath,
+      personalKey: cypherField(), // 🔑 A key Pessoal (Self use to read/edit)
+    }
   })
 }
 

@@ -6,8 +6,8 @@ type KeysStorage = {
 } & Document;
 
 type fieldKeyRelation = {
-  targetField: [path: string]; // É o field que a gente quer desincriptar.
-  keys: { 
+  targetField: string; // É o field que a gente quer desincriptar.
+  keys?: {
     // Roles... (ANOTHER USER to be able to read.)
     [role: string]: {
       user: ObjectId, // usuário "com autorização"
@@ -17,4 +17,4 @@ type fieldKeyRelation = {
   personalKey: string, // 🔑 A key Pessoal (Self use to read/edit)
 }
 
-export { KeysStorage, fieldKeyRelation};
+export { KeysStorage, fieldKeyRelation };
