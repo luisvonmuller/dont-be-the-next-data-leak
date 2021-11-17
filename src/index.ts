@@ -49,10 +49,10 @@ const cypherField = ()
 const generateFieldKeyRelation = (sensitiveField: string[], endUser: EndUser): void => {
   sensitiveField.map((propertyPath) => {
     let targetValue = { ...endUser.privateStuff }[propertyPath];
-    let generateSecret = ;
+    let accessKey: string = 'somerandomstring'; // todo: random.bytes(...).colet()
     const keysRelation: fieldKeyRelation = {
       targetField: propertyPath,
-      personalKey: cypherField(), // 🔑 A key Pessoal (Self use to read/edit)
+      personalKey: cypherField({ pseudoPublicKey: accessKey, ownSecret: endUser.password, }), // 🔑 A key Pessoal (Self use to read/edit)
     }
   })
 }
