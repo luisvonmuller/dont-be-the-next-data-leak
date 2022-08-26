@@ -27,6 +27,6 @@
   "dependencies": {
     "@types/mongoose": "^5.11.97",
     "crypto": "^1.0.1",
-    "mongoose": "^6.0.12"
+    "mongoose": "^6.4.6"
   }
 }
